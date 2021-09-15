@@ -47,6 +47,17 @@ print("Started connecting to the network...")
 iot.connect()
 pycom.rgbled(0x1F1F00) #yellow
 # We should now be connected.
+
+# Stiller klokka
+rtc = machine.RTC()
+rtc.ntp_sync("no.pool.ntp.org")
+while not rtc.synced():
+    #machine.idle()
+    time.sleep(1)
+
+print(utime.localtime())
+print("RTC synced with NTP time")
+
 # Setup an MQTT client.
 client = MQTTClient(
 client_id=THING_ID, server=MQTT_HOST,
@@ -58,6 +69,8 @@ client.connect()
 client.subscribe(MQTT_TOPIC_RECE)
 pycom.rgbled(0x1F001F) #Pink
 
+oppstarttid = utime.time()
+
 while True:
 
     value = dht.read()
@@ -68,7 +81,9 @@ while True:
             'temp': value.temperature,
             'hum': value.humidity
             },
-            'mem-stats': gc.mem_free()
+            'mem-stats': gc.mem_free(),
+            'tidsstempel' : "%04u-%02u-%02uT%02u:%02u:%02u" % utime.localtime()[0:6],
+            'oppetid'  : time.time() - oppstarttid
         }
         # Format payload as a JSON string
         json = dumps(payload)

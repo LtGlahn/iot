@@ -41,13 +41,13 @@ pycom.rgbled(0x00001F) # blue
 
 # MQTT configuration
 MQTT_PORT = 1883
-MQTT_HOST = 'hostname'                  # <--- ENTER HOST HERE
-MQTT_USER = 'username'                  # <--- ENTER USERNAME HERE
-MQTT_PASS = 'password'                  # <--- ENTER PASSWORD HERE
+MQTT_HOST = 'npra.io'                  # <--- ENTER HOST HERE
+MQTT_USER = 'iot-user'                  # <--- ENTER USERNAME HERE
+MQTT_PASS = 'agnesisenga'                  # <--- ENTER PASSWORD HERE
 
-THING_ID = 'some-identifier'             # <--- ENTER YOUR NAME OR SOMETHING HERE
-MQTT_TOPIC_SEND = 'iot/temp/send'        # <--- ENTER THE TOPIC TO SEND TO HERE
-MQTT_TOPIC_RECE = 'iot/temp/receive'     # <--- ENTER THE TOPIC TO RECEIVE FROM HERE
+THING_ID = 'Jan-GPSdings'             # <--- ENTER YOUR NAME OR SOMETHING HERE
+MQTT_TOPIC_SEND = 'iot/jan/send'        # <--- ENTER THE TOPIC TO SEND TO HERE
+MQTT_TOPIC_RECE = 'iot/jan/receive'     # <--- ENTER THE TOPIC TO RECEIVE FROM HERE
 
 def sub_callback(topic, msg):
   print(msg)
